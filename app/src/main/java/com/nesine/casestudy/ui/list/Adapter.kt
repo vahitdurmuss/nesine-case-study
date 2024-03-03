@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.nesine.casestudy.R
 import com.nesine.casestudy.ui.core.data.PostModel
 
-class PostsAdapter(val dataSet: List<PostModel>,val listener: PostItemClickListener) :
+class PostsAdapter(var dataSet: List<PostModel>, val listener: PostItemClickListener) :
     RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
 
     companion object{
@@ -23,7 +23,7 @@ class PostsAdapter(val dataSet: List<PostModel>,val listener: PostItemClickListe
         fun onClick(item: PostModel)
     }
 
-    inner class PostViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    class PostViewHolder(val view: View): RecyclerView.ViewHolder(view){
 
         var iconimageView:ImageView
         var titleTextView:TextView
@@ -52,7 +52,7 @@ class PostsAdapter(val dataSet: List<PostModel>,val listener: PostItemClickListe
 
         with(holder){
             titleTextView.text=postItem.title
-            descriptionTextView.text=postItem.description
+            descriptionTextView.text=postItem.body
         }
 
         loadImageIntoImageView(holder,position)

@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.nesine.casestudy.ui.list.ListViewModel" />
+
+        <import type="android.view.View"></import>
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.list.ListFragment">
@@ -18,13 +20,27 @@
             android:id="@+id/recylerview_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_post" />
 
         <ProgressBar
             android:id="@+id/progress_circular"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_gravity="center"></ProgressBar>
+            android:layout_gravity="center"
+            android:visibility="@{vm.progressVisibility ? View.VISIBLE : View.GONE}"></ProgressBar>
+
+        <TextView
+            android:id="@+id/textview_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="center"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            tools:text="Bir Hata Oluşmuştur"></TextView>
 
     </FrameLayout>
 </layout>

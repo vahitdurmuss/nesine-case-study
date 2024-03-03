@@ -18,7 +18,7 @@ class PostRepository {
                 if (it.isSuccessful) {
                     UIResult.Success(response.body())
                 } else {
-                    UIResult.Failure(Error(message = it.message()))
+                    UIResult.Failure(Error(it.message()))
                 }
             } ?: UIResult.GeneralFailure(NullPointerException())
 
