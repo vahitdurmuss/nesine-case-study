@@ -65,6 +65,7 @@ class PostsAdapter(var dataSet: List<PostModel>, val listener: PostItemClickList
     private fun loadImageIntoImageView(holder: PostViewHolder, position: Int){
         val positionImageUrl = image_url.replace(change_key, position.toString(), false)
         Glide.with(holder.view.context).load(positionImageUrl).into(holder.iconimageView)
+        dataSet[position].imageUrl=positionImageUrl
         //.placeholder(R.drawable.placeholder) // Optional placeholder image while loading
         //.error(R.drawable.error) // Optional error image if the load fails
     }
