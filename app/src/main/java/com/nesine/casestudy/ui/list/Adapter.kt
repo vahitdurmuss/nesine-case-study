@@ -6,11 +6,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.nesine.casestudy.R
 import com.nesine.casestudy.ui.core.data.PostModel
 
 class PostsAdapter(val dataSet: List<PostModel>,val listener: PostItemClickListener) :
     RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
+
+    companion object{
+        private const val change_key="{position}"
+        private const val image_url= "https://picsum.photos/300/300?random=$change_key&grayscale"
+    }
 
 
     interface PostItemClickListener{
@@ -49,9 +55,18 @@ class PostsAdapter(val dataSet: List<PostModel>,val listener: PostItemClickListe
             descriptionTextView.text=postItem.description
         }
 
+        loadImageIntoImageView(holder,position)
+
         holder.view.setOnClickListener {
             listener.onClick(postItem)
         }
+    }
+
+    private fun loadImageIntoImageView(holder: PostViewHolder, position: Int){
+        val positionImageUrl = image_url.replace(change_key, position.toString(), false)
+        Glide.with(holder.view.context).load(positionImageUrl).into(holder.iconimageView)
+        //.placeholder(R.drawable.placeholder) // Optional placeholder image while loading
+        //.error(R.drawable.error) // Optional error image if the load fails
     }
 
 }
