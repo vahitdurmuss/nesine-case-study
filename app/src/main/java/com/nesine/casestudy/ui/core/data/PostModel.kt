@@ -3,8 +3,9 @@ package com.nesine.casestudy.ui.core.data
 import android.os.Parcel
 import android.os.Parcelable
 
-data class PostModel(var imageUrl:String?, val title:String?, val body:String?) : Parcelable {
+data class PostModel(val id: Int,var imageUrl:String?, val title:String?, val body:String?) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
@@ -12,6 +13,7 @@ data class PostModel(var imageUrl:String?, val title:String?, val body:String?) 
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
         parcel.writeString(imageUrl)
         parcel.writeString(title)
         parcel.writeString(body)
