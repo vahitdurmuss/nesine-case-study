@@ -60,17 +60,17 @@ class ListViewModel private constructor(private val postRepository: PostReposito
 
             when (val result = postRepository.getPosts()) {
                 is NetworkResult.Success -> {
-                    _postsStateFlow.value = UIResult.Success(result.data!!.toMutableList())
+                    _postsStateFlow.value = UIResult.Success(result.data?.toMutableList()?: mutableListOf())
 
                 }
 
                 is NetworkResult.Failure -> {
-                    _postsStateFlow.value = UIResult.Failure(result.error.message!!)
+                    _postsStateFlow.value = UIResult.Failure(result.error.message?:"Sunucu hatası oluştu!")
                     _errorVisibility.value=true
                 }
 
                 is NetworkResult.GeneralFailure -> {
-                    _postsStateFlow.value = UIResult.Failure(result.e.message!!)
+                    _postsStateFlow.value = UIResult.Failure(result.e.message?:"Genel bir hata oluştu!")
                     _errorVisibility.value=true
                 }
 
