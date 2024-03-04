@@ -40,6 +40,7 @@
             android:textAlignment="center"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
+            android:visibility="@{vm.errorVisibility ? View.VISIBLE : View.GONE}"
             tools:text="Bir Hata Oluşmuştur"></TextView>
 
     </FrameLayout>

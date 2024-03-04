@@ -30,13 +30,19 @@ class ListViewModel private constructor(private val postRepository: PostReposito
     )
     val postStateFlow: StateFlow<UIResult<List<PostModel>?>> = _postsStateFlow
 
-    private val _progressVisibility = MutableLiveData(true)
+    private val _progressVisibility=MutableLiveData(false)
     val progressVisibility: LiveData<Boolean> = _progressVisibility
+
+
+    private val _errorVisibility = MutableLiveData(false)
+    val errorVisibility: LiveData<Boolean> = _errorVisibility
 
 
     init {
 
         viewModelScope.launch {
+
+            _progressVisibility.value = true
 
             when (val result = postRepository.getPosts()) {
                 is UIResult.Success -> {
@@ -46,13 +52,17 @@ class ListViewModel private constructor(private val postRepository: PostReposito
 
                 is UIResult.Failure -> {
                     _postsStateFlow.value = result
+                    _errorVisibility.value=true
                 }
 
                 is UIResult.GeneralFailure -> {
                     _postsStateFlow.value = result
+                    _errorVisibility.value=true
                 }
 
             }
+
+            _progressVisibility.value = false
 
         }
 
