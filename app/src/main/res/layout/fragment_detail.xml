@@ -1,13 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="vm"
+            type="com.nesine.casestudy.ui.detail.DetailViewModel" />
+
+        <import type="android.view.View"></import>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:context=".ui.detail.DetailFragment">
 
-</FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_32"
+            app:cardCornerRadius="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                tools:srcCompat="@tools:sample/avatars" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:maxLines="1"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/card_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_image"
+            app:layout_constraintTop_toTopOf="@+id/card_image"
+            tools:text="xdxdxdxdxdxdxdx"
+            android:text="@{vm.title}"/>
+
+        <EditText
+            android:id="@+id/txt_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginHorizontal="@dimen/dp_32"
+            android:gravity="start"
+            android:text="@{vm.body}"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_image"
+            tools:text="desdescdesddesdsdsesdesdsesedsedsedsese" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
