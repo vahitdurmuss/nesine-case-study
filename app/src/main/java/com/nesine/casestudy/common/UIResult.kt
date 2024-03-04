@@ -1,4 +1,4 @@
-package com.nesine.casestudy.ui.common
+package com.nesine.casestudy.common
 
 import java.lang.Exception
 

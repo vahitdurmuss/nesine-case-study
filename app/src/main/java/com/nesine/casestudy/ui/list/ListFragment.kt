@@ -7,19 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.nesine.casestudy.R
 import com.nesine.casestudy.databinding.FragmentListBinding
-import com.nesine.casestudy.ui.common.UIResult
-import com.nesine.casestudy.ui.core.data.PostModel
-import com.nesine.casestudy.ui.core.data.PostRepository
+import com.nesine.casestudy.common.UIResult
+import com.nesine.casestudy.core.data.PostModel
+import com.nesine.casestudy.core.data.PostRepository
 import com.nesine.casestudy.ui.detail.DetailFragment
 import kotlinx.coroutines.launch
 
 class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
 
-    private val viewModel: ListViewModel by activityViewModels { ListViewModel.Factory(PostRepository()) }
+    private val viewModel: ListViewModel by activityViewModels { ListViewModel.Factory(
+        PostRepository()
+    ) }
     private lateinit var binding: FragmentListBinding
     lateinit var  postsAdapter: PostsAdapter
 

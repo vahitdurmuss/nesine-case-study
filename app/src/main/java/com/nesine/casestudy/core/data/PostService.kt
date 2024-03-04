@@ -1,4 +1,4 @@
-package com.nesine.casestudy.ui.core.data
+package com.nesine.casestudy.core.data
 
 import retrofit2.http.GET
 

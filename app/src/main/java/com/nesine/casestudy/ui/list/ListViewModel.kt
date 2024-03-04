@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.nesine.casestudy.ui.common.UIResult
-import com.nesine.casestudy.ui.core.data.PostModel
-import com.nesine.casestudy.ui.core.data.PostRepository
+import com.nesine.casestudy.common.UIResult
+import com.nesine.casestudy.core.data.PostModel
+import com.nesine.casestudy.core.data.PostRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

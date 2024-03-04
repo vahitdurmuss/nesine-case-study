@@ -1,4 +1,4 @@
-package com.nesine.casestudy.ui.core.network
+package com.nesine.casestudy.core.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

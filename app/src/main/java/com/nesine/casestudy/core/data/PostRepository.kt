@@ -1,7 +1,7 @@
-package com.nesine.casestudy.ui.core.data
+package com.nesine.casestudy.core.data
 
-import com.nesine.casestudy.ui.common.UIResult
-import com.nesine.casestudy.ui.core.network.RetrofitClientInstance.retrofitInstance
+import com.nesine.casestudy.common.UIResult
+import com.nesine.casestudy.core.network.RetrofitClientInstance.retrofitInstance
 import java.lang.Exception
 
 

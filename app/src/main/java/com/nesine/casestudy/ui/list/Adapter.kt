@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nesine.casestudy.R
-import com.nesine.casestudy.ui.core.data.PostModel
+import com.nesine.casestudy.core.data.PostModel
 
 class PostsAdapter(var dataSet: List<PostModel>, val listener: PostItemClickListener) :
     RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {

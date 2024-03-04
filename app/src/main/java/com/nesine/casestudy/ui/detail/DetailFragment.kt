@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.nesine.casestudy.databinding.FragmentDetailBinding
-import com.nesine.casestudy.ui.core.data.PostModel
+import com.nesine.casestudy.core.data.PostModel
 import com.nesine.casestudy.ui.list.ListViewModel
 
 class DetailFragment : Fragment() {
