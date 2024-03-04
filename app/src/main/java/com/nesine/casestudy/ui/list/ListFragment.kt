@@ -61,7 +61,7 @@ class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
                         }
                     }
 
-                    is UIResult.Failure<*> ->{
+                    is UIResult.Failure ->{
                         Toast.makeText(requireContext(),it.message,Toast.LENGTH_LONG).show()
                     }
 

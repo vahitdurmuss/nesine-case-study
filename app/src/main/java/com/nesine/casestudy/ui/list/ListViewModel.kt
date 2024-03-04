@@ -35,6 +35,15 @@ class ListViewModel private constructor(private val postRepository: PostReposito
         }
     }
 
+    val changeWithEditedPost: (editedPost: PostModel)-> Unit ={
+        (_postsStateFlow.value as? UIResult.Success)?.run {
+            val post=this.data.find { post->it.id==post.id }
+            val index= this.data.indexOf(post)
+            this.data.removeAt(index)
+            this.data.add(index,it)
+        }
+    }
+
     private val _progressVisibility=MutableLiveData(false)
     val progressVisibility: LiveData<Boolean> = _progressVisibility
 
