@@ -34,6 +34,7 @@ class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm=viewModel
+        binding.lifecycleOwner=this@ListFragment
         observeStates()
     }
 
