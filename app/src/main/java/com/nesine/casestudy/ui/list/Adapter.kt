@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.nesine.casestudy.R
 import com.nesine.casestudy.core.data.PostModel
 
-class PostsAdapter(var dataSet: List<PostModel>, val listener: PostItemClickListener) :
+class PostsAdapter(private val dataSet: MutableList<PostModel>, val listener: PostItemClickListener) :
     RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
 
     companion object{
@@ -21,6 +21,13 @@ class PostsAdapter(var dataSet: List<PostModel>, val listener: PostItemClickList
 
     interface PostItemClickListener{
         fun onClick(item: PostModel)
+    }
+
+    fun removeItem(position:Int) : PostModel{
+        val model=dataSet[position]
+        dataSet.removeAt(position)
+        notifyItemRemoved(position)
+        return model
     }
 
     class PostViewHolder(val view: View): RecyclerView.ViewHolder(view){

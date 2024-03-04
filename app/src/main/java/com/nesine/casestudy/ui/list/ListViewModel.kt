@@ -24,8 +24,16 @@ class ListViewModel private constructor(private val postRepository: PostReposito
     }
 
 
-    private val _postsStateFlow = MutableStateFlow<UIResult?>(null)
-    val postStateFlow: StateFlow<UIResult?> = _postsStateFlow
+    private val _postsStateFlow = MutableStateFlow<UIResult<MutableList<PostModel>>>(UIResult.Success(
+        mutableListOf()
+    ))
+    val postStateFlow: StateFlow<UIResult<List<PostModel>>> = _postsStateFlow
+
+    val removePost: (post: PostModel)-> Unit ={
+        (_postsStateFlow.value as? UIResult.Success)?.run {
+           this.data.remove(it)
+        }
+    }
 
     private val _progressVisibility=MutableLiveData(false)
     val progressVisibility: LiveData<Boolean> = _progressVisibility
@@ -43,17 +51,17 @@ class ListViewModel private constructor(private val postRepository: PostReposito
 
             when (val result = postRepository.getPosts()) {
                 is NetworkResult.Success -> {
-                    _postsStateFlow.value = UIResult.Success(result.data)
+                    _postsStateFlow.value = UIResult.Success(result.data!!.toMutableList())
 
                 }
 
                 is NetworkResult.Failure -> {
-                    _postsStateFlow.value = UIResult.Failure(result.error)
+                    _postsStateFlow.value = UIResult.Failure(result.error.message!!)
                     _errorVisibility.value=true
                 }
 
                 is NetworkResult.GeneralFailure -> {
-                    _postsStateFlow.value = UIResult.Failure(result.e)
+                    _postsStateFlow.value = UIResult.Failure(result.e.message!!)
                     _errorVisibility.value=true
                 }
 

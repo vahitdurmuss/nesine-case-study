@@ -1,20 +1,24 @@
 package com.nesine.casestudy.ui.list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.nesine.casestudy.R
-import com.nesine.casestudy.databinding.FragmentListBinding
 import com.nesine.casestudy.common.UIResult
 import com.nesine.casestudy.core.data.PostModel
 import com.nesine.casestudy.core.data.PostRepository
+import com.nesine.casestudy.databinding.FragmentListBinding
 import com.nesine.casestudy.ui.detail.DetailFragment
 import kotlinx.coroutines.launch
+
 
 class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
 
@@ -36,6 +40,7 @@ class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         binding.vm=viewModel
         binding.lifecycleOwner=this@ListFragment
+
         observeStates()
     }
 
@@ -47,18 +52,19 @@ class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
 
                 when(it){
 
-                    is UIResult.Success<*> -> {
+                    is UIResult.Success-> {
                         it.data?.run {
-                            postsAdapter= PostsAdapter(it.data as List<PostModel>,this@ListFragment)
+                            postsAdapter= PostsAdapter(it.data.toMutableList(),this@ListFragment)
+                            val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+                            itemTouchHelper.attachToRecyclerView( binding.recylerviewPost)
                             binding.recylerviewPost.adapter=postsAdapter
                         }
                     }
 
                     is UIResult.Failure<*> ->{
-
+                        Toast.makeText(requireContext(),it.message,Toast.LENGTH_LONG).show()
                     }
 
-                    else -> {}
                 }
 
             }
@@ -74,6 +80,27 @@ class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
             })
             addToBackStack(null)
             commit()
+        }
+    }
+
+   private var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
+        ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT or ItemTouchHelper.DOWN or ItemTouchHelper.UP
+        ) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
+            Toast.makeText(requireContext(), "Silindi", Toast.LENGTH_SHORT).show()
+            val position = viewHolder.adapterPosition
+            val deletedOne=postsAdapter.removeItem(position)
+            viewModel.removePost(deletedOne)
         }
     }
 
