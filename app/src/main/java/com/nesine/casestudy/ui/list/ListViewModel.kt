@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.nesine.casestudy.common.UIResult
 import com.nesine.casestudy.core.data.PostModel
 import com.nesine.casestudy.core.data.PostRepository
+import com.nesine.casestudy.core.network.NetworkResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -23,12 +24,8 @@ class ListViewModel private constructor(private val postRepository: PostReposito
     }
 
 
-    private val _postsStateFlow = MutableStateFlow<UIResult<List<PostModel>?>>(
-        UIResult.Success(
-            emptyList()
-        )
-    )
-    val postStateFlow: StateFlow<UIResult<List<PostModel>?>> = _postsStateFlow
+    private val _postsStateFlow = MutableStateFlow<UIResult?>(null)
+    val postStateFlow: StateFlow<UIResult?> = _postsStateFlow
 
     private val _progressVisibility=MutableLiveData(false)
     val progressVisibility: LiveData<Boolean> = _progressVisibility
@@ -45,18 +42,18 @@ class ListViewModel private constructor(private val postRepository: PostReposito
             _progressVisibility.value = true
 
             when (val result = postRepository.getPosts()) {
-                is UIResult.Success -> {
-                    _postsStateFlow.value = result
+                is NetworkResult.Success -> {
+                    _postsStateFlow.value = UIResult.Success(result.data)
 
                 }
 
-                is UIResult.Failure -> {
-                    _postsStateFlow.value = result
+                is NetworkResult.Failure -> {
+                    _postsStateFlow.value = UIResult.Failure(result.error)
                     _errorVisibility.value=true
                 }
 
-                is UIResult.GeneralFailure -> {
-                    _postsStateFlow.value = result
+                is NetworkResult.GeneralFailure -> {
+                    _postsStateFlow.value = UIResult.Failure(result.e)
                     _errorVisibility.value=true
                 }
 

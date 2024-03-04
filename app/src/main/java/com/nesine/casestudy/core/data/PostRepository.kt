@@ -1,13 +1,14 @@
 package com.nesine.casestudy.core.data
 
 import com.nesine.casestudy.common.UIResult
+import com.nesine.casestudy.core.network.NetworkResult
 import com.nesine.casestudy.core.network.RetrofitClientInstance.retrofitInstance
 import java.lang.Exception
 
 
 class PostRepository {
 
-    suspend fun getPosts(): UIResult<List<PostModel>?> {
+    suspend fun getPosts(): NetworkResult<List<PostModel>?> {
 
         return try {
             val service: PostService? = retrofitInstance?.create(PostService::class.java)
@@ -16,15 +17,15 @@ class PostRepository {
 
             response?.let {
                 if (it.isSuccessful) {
-                    UIResult.Success(response.body())
+                    NetworkResult.Success(response.body())
                 } else {
-                    UIResult.Failure(Error(it.message()))
+                    NetworkResult.Failure(Error(it.message()))
                 }
-            } ?: UIResult.GeneralFailure(NullPointerException())
+            } ?: NetworkResult.GeneralFailure(NullPointerException())
 
 
         } catch (e: Exception) {
-            UIResult.GeneralFailure(e)
+            NetworkResult.GeneralFailure(e)
         }
 
     }

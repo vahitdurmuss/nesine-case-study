@@ -47,21 +47,18 @@ class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
 
                 when(it){
 
-                    is UIResult.Success-> {
+                    is UIResult.Success<*> -> {
                         it.data?.run {
-                            postsAdapter= PostsAdapter(it.data,this@ListFragment)
+                            postsAdapter= PostsAdapter(it.data as List<PostModel>,this@ListFragment)
                             binding.recylerviewPost.adapter=postsAdapter
                         }
                     }
 
-                    is UIResult.Failure->{
+                    is UIResult.Failure<*> ->{
 
                     }
 
-                    is UIResult.GeneralFailure->{
-
-                    }
-
+                    else -> {}
                 }
 
             }
