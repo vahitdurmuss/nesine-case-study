@@ -76,7 +76,7 @@ class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
 
         parentFragmentManager.beginTransaction().run {
             replace(R.id.container_fragment, DetailFragment().apply {
-                this.arguments= bundleOf().apply { putParcelable("post",item) }
+                this.arguments= bundleOf().apply { putParcelable(DetailFragment.PARAMETER_NAME,item) }
             })
             addToBackStack(null)
             commit()
@@ -97,7 +97,7 @@ class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-            Toast.makeText(requireContext(), "Silindi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), resources.getString(R.string.deleted), Toast.LENGTH_SHORT).show()
             val position = viewHolder.adapterPosition
             val deletedOne=postsAdapter.removeItem(position)
             viewModel.removePost(deletedOne)

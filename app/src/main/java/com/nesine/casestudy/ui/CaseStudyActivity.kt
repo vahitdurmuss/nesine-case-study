@@ -3,6 +3,7 @@ package com.nesine.casestudy.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.nesine.casestudy.R
+import com.nesine.casestudy.ui.detail.OnBackPressedListener
 import com.nesine.casestudy.ui.list.ListFragment
 
 class CaseStudyActivity : AppCompatActivity() {
@@ -13,5 +14,16 @@ class CaseStudyActivity : AppCompatActivity() {
            replace(R.id.container_fragment,ListFragment())
            commit()
         }
+    }
+
+    override fun onBackPressed() {
+
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.container_fragment)
+
+        if (currentFragment is OnBackPressedListener) {
+            currentFragment.onBackPressed()
+        }
+
+        super.onBackPressed()
     }
 }
