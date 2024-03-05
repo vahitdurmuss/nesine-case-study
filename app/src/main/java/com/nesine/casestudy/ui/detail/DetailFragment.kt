@@ -1,7 +1,7 @@
 package com.nesine.casestudy.ui.detail
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -44,9 +44,16 @@ class DetailFragment : Fragment() , OnBackPressedListener{
         }
 
         viewModel.model.let {
+
             viewModel.title.value= it.title.toString()
             viewModel.body.value=it.body.toString()
-            Glide.with(requireContext()).load(it.imageUrl).into(binding.imageIcon)
+
+            Glide.with(requireContext())
+                .load(it.imageUrl)
+                .placeholder(ColorDrawable(Color.GRAY))
+                .error(ColorDrawable(Color.RED))
+                .into(binding.imageIcon)
+
         }
 
     }
