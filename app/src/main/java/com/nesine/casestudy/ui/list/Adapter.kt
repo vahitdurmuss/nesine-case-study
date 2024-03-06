@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.nesine.casestudy.R
 import com.nesine.casestudy.core.data.PostModel
 
-class PostsAdapter(private val dataSet: MutableList<PostModel>, val listener: PostItemClickListener) :
+class PostsAdapter constructor(private val dataSet: MutableList<PostModel>, val listener: PostItemClickListener) :
     RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
 
     companion object{

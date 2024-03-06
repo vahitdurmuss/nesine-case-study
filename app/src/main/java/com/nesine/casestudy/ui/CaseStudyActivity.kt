@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.nesine.casestudy.R
 import com.nesine.casestudy.ui.detail.OnBackPressedListener
 import com.nesine.casestudy.ui.list.ListFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CaseStudyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

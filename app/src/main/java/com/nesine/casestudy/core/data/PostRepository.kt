@@ -1,12 +1,12 @@
 package com.nesine.casestudy.core.data
 
-import com.nesine.casestudy.common.UIResult
 import com.nesine.casestudy.core.network.NetworkResult
 import com.nesine.casestudy.core.network.RetrofitClientInstance.retrofitInstance
 import java.lang.Exception
+import javax.inject.Inject
 
 
-class PostRepository {
+class PostRepository @Inject constructor() {
 
     suspend fun getPosts(): NetworkResult<List<PostModel>?> {
 

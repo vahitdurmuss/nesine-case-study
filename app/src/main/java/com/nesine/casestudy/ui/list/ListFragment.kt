@@ -14,17 +14,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nesine.casestudy.R
 import com.nesine.casestudy.common.UIResult
 import com.nesine.casestudy.core.data.PostModel
-import com.nesine.casestudy.core.data.PostRepository
 import com.nesine.casestudy.databinding.FragmentListBinding
 import com.nesine.casestudy.ui.detail.DetailFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class ListFragment : Fragment(), PostsAdapter.PostItemClickListener {
 
-    private val viewModel: ListViewModel by activityViewModels { ListViewModel.Factory(
-        PostRepository()
-    ) }
+    private val viewModel: ListViewModel by activityViewModels()
     private lateinit var binding: FragmentListBinding
     lateinit var  postsAdapter: PostsAdapter
 

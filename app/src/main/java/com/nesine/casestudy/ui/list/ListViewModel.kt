@@ -9,24 +9,21 @@ import com.nesine.casestudy.common.UIResult
 import com.nesine.casestudy.core.data.PostModel
 import com.nesine.casestudy.core.data.PostRepository
 import com.nesine.casestudy.core.network.NetworkResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ListViewModel private constructor(private val postRepository: PostRepository) : ViewModel() {
-
-
-    class Factory(private val postRepository: PostRepository) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ListViewModel(postRepository) as T
-        }
-    }
+@HiltViewModel
+class ListViewModel @Inject constructor(private val postRepository: PostRepository) : ViewModel() {
 
 
     private val _postsStateFlow = MutableStateFlow<UIResult<MutableList<PostModel>>>(UIResult.Success(
         mutableListOf()
     ))
+
+
     val postStateFlow: StateFlow<UIResult<List<PostModel>>> = _postsStateFlow
 
     val removePost: (post: PostModel)-> Unit ={

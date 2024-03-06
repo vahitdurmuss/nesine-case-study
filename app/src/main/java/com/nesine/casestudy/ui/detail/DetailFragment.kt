@@ -13,7 +13,9 @@ import com.bumptech.glide.Glide
 import com.nesine.casestudy.databinding.FragmentDetailBinding
 import com.nesine.casestudy.core.data.PostModel
 import com.nesine.casestudy.ui.list.ListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() , OnBackPressedListener{
 
     private val listViewModel: ListViewModel by activityViewModels()
